@@ -45,7 +45,7 @@ const AboutUs = () => {
         <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
           <span style={{ color: '#0A2540', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', fontSize: '12px' }}>Why Choose Us</span>
           <h2 style={{ fontSize: '2.5rem', color: '#0A2540', fontWeight: '800', marginTop: '10px', marginBottom: '50px' }}>Our Specialties</h2>
-          
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
             {[
               { icon: '🌿', title: 'Herbal Spa', desc: 'Rejuvenate with authentic Ayurvedic treatments.' },
@@ -69,27 +69,41 @@ const AboutUs = () => {
           <h2 style={{ fontSize: '2.5rem', color: '#0A2540', fontWeight: '800' }}>Special Offers</h2>
           <p style={{ color: '#64748B', fontSize: '1.1rem' }}>Take advantage of our seasonal packages for an unforgettable getaway.</p>
         </div>
-        
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '30px', justifyContent: 'center' }}>
-          <div style={{ flex: '1 1 350px', maxWidth: '500px', backgroundColor: 'white', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 15px 35px rgba(0,0,0,0.06)', border: '1px solid #E2E8F0' }}>
-            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80" alt="Honeymoon" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
-            <div style={{ padding: '30px' }}>
-              <span style={{ backgroundColor: '#FFD700', color: '#0A2540', padding: '5px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>COUPLES</span>
-              <h3 style={{ fontSize: '1.5rem', color: '#0A2540', margin: '15px 0 10px 0' }}>Romantic Honeymoon Package</h3>
-              <p style={{ color: '#64748B', marginBottom: '20px' }}>Enjoy a 3-night stay in our Grand Ocean Suite with a complimentary couple's spa treatment and candlelit dinner.</p>
-              <button style={{ width: '100%', padding: '12px', backgroundColor: '#0A2540', color: 'white', border: 'none', borderRadius: '8px', fontWeight: '700', cursor: 'pointer' }}>Claim Offer</button>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '30px',
+          alignItems: 'stretch'
+        }}>
+          {[
+            { tag: 'COUPLES', color: '#FFD700', title: 'Romantic Honeymoon Package', desc: "Enjoy a 3-night stay in our Grand Ocean Suite with a complimentary couple's spa treatment and candlelit dinner.", img: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80' },
+            { tag: 'FAMILY', color: '#22C55E', title: 'Weekend Family Escape', desc: 'Book a Luxury Family Villa and get free breakfast, kids club access, and a guided tour of Anuradhapura ruins.', img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80' },
+            { tag: 'BUSINESS', color: '#3B82F6', title: 'Executive Corporate Retreat', desc: 'Special rates for corporate groups. Includes private meeting room access, high-speed Wi-Fi, and executive lounge perks.', img: 'https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=800&q=80' },
+            { tag: 'LONG STAY', color: '#A07817', title: 'Extended Stay Discount', desc: 'Stay with us for 7 nights or more and enjoy a flat 20% off your entire booking, plus complimentary airport transfers.', img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80' }
+          ].map((offer, idx) => (
+            <div key={idx} style={{
+              backgroundColor: 'white',
+              borderRadius: '20px',
+              overflow: 'hidden',
+              boxShadow: '0 15px 35px rgba(0,0,0,0.06)',
+              border: '1px solid #E2E8F0',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <img src={offer.img} alt={offer.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+              <div style={{ padding: '25px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                <span style={{ backgroundColor: offer.color, color: offer.tag === 'COUPLES' ? '#0A2540' : 'white', padding: '5px 12px', borderRadius: '20px', fontSize: '11px', fontWeight: 'bold', display: 'inline-block', marginBottom: '15px', alignSelf: 'flex-start' }}>
+                  {offer.tag}
+                </span>
+                <h3 style={{ fontSize: '1.3rem', color: '#0A2540', margin: '0 0 15px 0' }}>{offer.title}</h3>
+                <p style={{ color: '#64748B', fontSize: '0.95rem', marginBottom: 'auto' }}>{offer.desc}</p>
+                <button style={{ width: '100%', padding: '12px', backgroundColor: '#0A2540', color: 'white', border: 'none', borderRadius: '8px', fontWeight: '700', cursor: 'pointer', marginTop: '20px' }}>
+                  Claim Offer
+                </button>
+              </div>
             </div>
-          </div>
-          
-          <div style={{ flex: '1 1 350px', maxWidth: '500px', backgroundColor: 'white', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 15px 35px rgba(0,0,0,0.06)', border: '1px solid #E2E8F0' }}>
-            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Family" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
-            <div style={{ padding: '30px' }}>
-              <span style={{ backgroundColor: '#22C55E', color: 'white', padding: '5px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>FAMILY</span>
-              <h3 style={{ fontSize: '1.5rem', color: '#0A2540', margin: '15px 0 10px 0' }}>Weekend Family Escape</h3>
-              <p style={{ color: '#64748B', marginBottom: '20px' }}>Book a Luxury Family Villa and get free breakfast, kids club access, and a guided tour of Anuradhapura ruins.</p>
-              <button style={{ width: '100%', padding: '12px', backgroundColor: '#0A2540', color: 'white', border: 'none', borderRadius: '8px', fontWeight: '700', cursor: 'pointer' }}>Claim Offer</button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       <ModernFooter />

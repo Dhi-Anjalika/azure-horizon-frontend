@@ -63,7 +63,7 @@ const RoomsPage = () => {
       <main style={{ maxWidth: '1400px', margin: '0 auto', padding: '100px 20px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '100px' }}>
           {filteredRooms.map((room, index) => (
-            <div key={room.id} style={{ 
+            <div key={room.id} className="premium-room-card" style={{ 
               display: 'flex', 
               flexDirection: index % 2 === 0 ? 'row' : 'row-reverse',
               alignItems: 'center',
@@ -134,6 +134,28 @@ const RoomsPage = () => {
       </main>
 
       <ModernFooter />
+
+      <style>
+        {`
+          @media (max-width: 900px) {
+            .premium-room-card {
+              flex-direction: column !important;
+              gap: 30px !important;
+              padding: 20px !important;
+            }
+            .premium-room-card > div:first-child {
+              width: 100% !important;
+              height: 300px !important;
+            }
+            .premium-room-card > div:last-child {
+              padding: 10px !important;
+            }
+            .premium-room-card h2 {
+              fontSize: 2.2rem !important;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };

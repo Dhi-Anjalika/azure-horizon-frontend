@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReviewsSection from '../components/home/reviewSection';
+import ModernFooter from '../components/common/footer';
 
 const Home = () => {
   // State Management for Interactivity
@@ -7,7 +8,7 @@ const Home = () => {
   const [vehicleType, setVehicleType] = useState('Luxury Sedan');
   const [pickupDate, setPickupDate] = useState('');
   const [isBotOpen, setIsBotOpen] = useState(false);
-  
+
   // 🎠 1. COVER PHOTO SLIDER STATE & DATA
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
@@ -32,7 +33,6 @@ const Home = () => {
     }
   ];
 
-  // Auto-slide effect every 5 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -63,73 +63,76 @@ const Home = () => {
   const filteredRooms = activeTab === 'all' ? rooms : rooms.filter(r => r.type === activeTab);
 
   return (
-    // Main Container ekema thibunu pading saha margin sampurnayenma ain kalaa (padding: 0, margin: 0)
     <div style={{ width: '100%', minHeight: '100vh', backgroundColor: '#F8FAFC', fontFamily: '"Inter", "Segoe UI", sans-serif', margin: 0, padding: 0, boxSizing: 'border-box', overflowX: 'hidden' }}>
-      
+
       {/* 🎠 1. DYNAMIC HERO SLIDER (COVER PHOTO WITH DISCOUNTS) */}
       <div style={{ width: '100%', height: '80vh', position: 'relative', overflow: 'hidden', margin: 0, padding: 0 }}>
         {slides.map((slide, index) => (
           <div
             key={index}
             style={{
-              width: '100%',
-              height: '100%',
               position: 'absolute',
-              top: 0,
-              left: 0,
-              backgroundImage: `linear-gradient(rgba(10, 37, 64, 0.4), rgba(10, 37, 64, 0.85)), url("${slide.image}")`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              color: 'white',
-              textAlign: 'center',
-              padding: '0 20px',
-              boxSizing: 'border-box',
-              opacity: currentSlide === index ? 1 : 0,
+              top: 0, left: 0, width: '100%', height: '100%',
+              opacity: index === currentSlide ? 1 : 0,
               transition: 'opacity 1s ease-in-out',
-              zIndex: currentSlide === index ? 1 : 0
+              zIndex: index === currentSlide ? 1 : 0
             }}
           >
-            <span style={{ backgroundColor: '#FFD700', color: '#0A2540', padding: '6px 16px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '20px', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}>
-              {slide.badge}
-            </span>
-            <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '15px', textShadow: '2px 4px 15px rgba(0,0,0,0.4)', maxWidth: '900px' }}>
-              {slide.title}
-            </h1>
-            <p style={{ fontSize: '1.3rem', color: '#F1F5F9', fontWeight: '400', marginBottom: '25px', maxWidth: '700px' }}>
-              {slide.subtitle}
-            </p>
-            {slide.offer && (
-              <div style={{ border: '2px dashed #FFD700', padding: '10px 25px', borderRadius: '8px', fontSize: '1.2rem', fontWeight: 'bold', color: '#FFD700', backgroundColor: 'rgba(255,215,0,0.1)' }}>
-                {slide.offer}
-              </div>
-            )}
+            <div style={{
+              width: '100%', height: '100%',
+              backgroundImage: `linear-gradient(rgba(10, 37, 64, 0.4), rgba(10, 37, 64, 0.7)), url(${slide.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
+              color: 'white', textAlign: 'center', padding: '0 20px', boxSizing: 'border-box'
+            }}>
+              <span style={{ backgroundColor: '#FFD700', color: '#0A2540', padding: '8px 20px', borderRadius: '30px', fontSize: '13px', fontWeight: 'bold', letterSpacing: '3px', marginBottom: '25px', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}>
+                {slide.badge}
+              </span>
+              <h1 style={{ fontSize: '4.5rem', fontWeight: '800', marginBottom: '15px', textShadow: '0 10px 30px rgba(0,0,0,0.5)', maxWidth: '900px', fontFamily: 'serif', lineHeight: '1.1' }}>
+                {slide.title}
+              </h1>
+              <p style={{ fontSize: '1.4rem', color: '#F8FAFC', fontWeight: '400', marginBottom: '35px', maxWidth: '700px', textShadow: '0 4px 10px rgba(0,0,0,0.3)' }}>
+                {slide.subtitle}
+              </p>
+              {slide.offer && (
+                <div style={{ backgroundColor: 'rgba(255, 215, 0, 0.1)', border: '1px dashed #FFD700', padding: '10px 20px', borderRadius: '8px', marginBottom: '30px', display: 'inline-block' }}>
+                  <span style={{ color: '#FFD700', fontWeight: 'bold', fontSize: '1.2rem', letterSpacing: '1px' }}>{slide.offer}</span>
+                </div>
+              )}
+              <button style={{ backgroundColor: '#0A2540', color: 'white', border: 'none', padding: '15px 40px', fontSize: '1.1rem', fontWeight: 'bold', borderRadius: '8px', cursor: 'pointer', boxShadow: '0 10px 25px rgba(0,0,0,0.3)', transition: 'background-color 0.3s' }} onMouseEnter={e => e.target.style.backgroundColor = '#A07817'} onMouseLeave={e => e.target.style.backgroundColor = '#0A2540'}>
+                EXPLORE OFFERS
+              </button>
+            </div>
           </div>
         ))}
+        {/* Slider Navigation Dots */}
+        <div style={{ position: 'absolute', bottom: '130px', left: '0', right: '0', display: 'flex', justifyContent: 'center', gap: '15px', zIndex: '10' }}>
+          {slides.map((_, idx) => (
+            <div key={idx} onClick={() => setCurrentSlide(idx)} style={{ width: idx === currentSlide ? '30px' : '10px', height: '10px', borderRadius: '5px', backgroundColor: idx === currentSlide ? '#FFD700' : 'rgba(255,255,255,0.5)', cursor: 'pointer', transition: 'all 0.3s ease', boxShadow: '0 2px 5px rgba(0,0,0,0.3)' }}></div>
+          ))}
+        </div>
 
         {/* Floating Search Panel On Top of Slider */}
-        <div style={{ position: 'absolute', bottom: '30px', left: '0', right: '0', zIndex: '10', width: '100%', padding: '0 40px', boxSizing: 'border-box' }}>
-          <div style={{ backgroundColor: 'white', padding: '20px 30px', borderRadius: '16px', boxShadow: '0 20px 40px rgba(0,0,0,0.25)', display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap', color: '#333', width: '100%', boxSizing: 'border-box' }}>
+        <div style={{ position: 'absolute', bottom: '30px', left: '0', right: '0', zIndex: '10', width: '100%', padding: '0 20px', boxSizing: 'border-box', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(10px)', padding: '20px 30px', borderRadius: '16px', boxShadow: '0 20px 40px rgba(0,0,0,0.25)', display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap', color: '#333', width: '100%', maxWidth: '1100px', boxSizing: 'border-box' }}>
             <div style={{ flex: 1, minWidth: '150px', textAlign: 'left' }}>
               <label style={{ fontSize: '11px', fontWeight: 'bold', color: '#64748B', display: 'block', marginBottom: '5px' }}>CHECK-IN DATE</label>
-              <input type="date" style={{ width: '100%', padding: '12px', border: '1px solid #E2E8F0', borderRadius: '8px' }} />
+              <input type="date" style={{ width: '100%', padding: '12px', border: '1px solid #E2E8F0', borderRadius: '8px', boxSizing: 'border-box' }} />
             </div>
             <div style={{ flex: 1, minWidth: '150px', textAlign: 'left' }}>
               <label style={{ fontSize: '11px', fontWeight: 'bold', color: '#64748B', display: 'block', marginBottom: '5px' }}>CHECK-OUT DATE</label>
-              <input type="date" style={{ width: '100%', padding: '12px', border: '1px solid #E2E8F0', borderRadius: '8px' }} />
+              <input type="date" style={{ width: '100%', padding: '12px', border: '1px solid #E2E8F0', borderRadius: '8px', boxSizing: 'border-box' }} />
             </div>
             <div style={{ flex: 1, minWidth: '130px', textAlign: 'left' }}>
               <label style={{ fontSize: '11px', fontWeight: 'bold', color: '#64748B', display: 'block', marginBottom: '5px' }}>ROOM SUITE</label>
-              <select style={{ width: '100%', padding: '12px', border: '1px solid #E2E8F0', borderRadius: '8px', backgroundColor: 'white' }}>
+              <select style={{ width: '100%', padding: '12px', border: '1px solid #E2E8F0', borderRadius: '8px', backgroundColor: 'white', boxSizing: 'border-box' }}>
                 <option>Standard Pack</option>
                 <option>Deluxe Suite</option>
                 <option>Presidential Suite</option>
               </select>
             </div>
-            <button style={{ backgroundColor: '#0A2540', color: 'white', border: 'none', padding: '14px 35px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', alignSelf: 'flex-end', height: '48px', boxShadow: '0 4px 12px rgba(10,37,64,0.2)' }}>
+            <button style={{ backgroundColor: '#0A2540', color: 'white', border: 'none', padding: '14px 35px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', alignSelf: 'flex-end', height: '48px', boxShadow: '0 4px 12px rgba(10,37,64,0.2)', transition: 'background-color 0.3s' }} onMouseEnter={e => e.target.style.backgroundColor = '#A07817'} onMouseLeave={e => e.target.style.backgroundColor = '#0A2540'}>
               EXPLORE SLOTS
             </button>
           </div>
@@ -155,8 +158,8 @@ const Home = () => {
       </div>
 
       {/* 🎛️ 3. NO WHITE SPACE - BANNER SECTION - FULL WIDTH */}
-      <div style={{ width: '100%', padding: '20px 40px', boxSizing: 'border-box' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '0px', alignItems: 'center', backgroundColor: 'white', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.02)', border: '1px solid #F1F5F9' }}>
+      <div style={{ width: '100%', padding: '20px', boxSizing: 'border-box' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '0px', alignItems: 'center', backgroundColor: 'white', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.02)', border: '1px solid #F1F5F9' }}>
           <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80" alt="Resort Area" style={{ width: '100%', height: '100%', minHeight: '400px', objectFit: 'cover' }} />
           <div style={{ padding: '50px' }}>
             <span style={{ color: '#0A2540', fontWeight: 'bold', fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase' }}>Elite Hospitality</span>
@@ -172,10 +175,10 @@ const Home = () => {
       <div style={{ width: '100%', padding: '40px 40px', boxSizing: 'border-box', textAlign: 'center' }}>
         <span style={{ color: '#0A2540', fontWeight: 'bold', fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>Our Spaces</span>
         <h2 style={{ fontSize: '2.2rem', color: '#0A2540', marginTop: '5px', marginBottom: '30px', fontWeight: '700' }}>Curated Luxury Accommodations</h2>
-        
+
         <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '40px' }}>
           {['all', 'standard', 'deluxe', 'suite'].map(tab => (
-            <button 
+            <button
               key={tab} onClick={() => setActiveTab(tab)}
               style={{ padding: '10px 24px', borderRadius: '25px', border: 'none', fontWeight: '600', cursor: 'pointer', textTransform: 'capitalize', backgroundColor: activeTab === tab ? '#0A2540' : '#E2E8F0', color: activeTab === tab ? 'white' : '#475569', transition: '0.3s' }}
             >
@@ -208,7 +211,7 @@ const Home = () => {
         <div style={{ width: '100%', textAlign: 'center' }}>
           <span style={{ color: '#0A2540', fontWeight: 'bold', fontSize: '13px', textTransform: 'uppercase' }}>Visual Tour</span>
           <h2 style={{ fontSize: '2.2rem', color: '#0A2540', fontWeight: '700', marginTop: '5px', marginBottom: '35px' }}>Azure Horizon Image Gallery</h2>
-          
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
             {galleryImages.map((img, i) => (
               <div key={i} style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', height: '240px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', cursor: 'pointer' }}>
@@ -274,12 +277,12 @@ const Home = () => {
         </div>
       </div>
       {/*REVIEW SECTION*/}
-      <ReviewsSection/>
+      <ReviewsSection />
 
       {/* 🗺️ 8. MODERN SPLIT GOOGLE MAP SECTION - FULL WIDTH */}
       <div style={{ width: '100%', padding: '0 40px 60px 40px', boxSizing: 'border-box' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', backgroundColor: 'white', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 15px 35px rgba(0,0,0,0.05)', border: '1px solid #E2E8F0' }}>
-          
+
           {/* Map Information Left Panel */}
           <div style={{ padding: '50px', backgroundColor: '#0A2540', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <span style={{ color: '#FFD700', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px', letterSpacing: '1px' }}>Location Guide</span>
@@ -287,7 +290,7 @@ const Home = () => {
             <p style={{ color: '#94A3B8', lineHeight: '1.7', marginBottom: '30px', fontSize: '1rem' }}>
               Nestled beautifully in the heart of the sacred city of Anuradhapura, our resort provides unparalleled access to ancient ruins, pristine lakes, and fine culinary hubs.
             </p>
-            
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <span style={{ fontSize: '24px' }}>📍</span>
@@ -315,13 +318,13 @@ const Home = () => {
 
           {/* Interactive Map Right Panel */}
           <div style={{ height: '450px', position: 'relative' }}>
-            <iframe 
+            <iframe
               title="Azure Horizon Location Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63163.791559132225!2d80.37920115!3d8.33467475!2m3!1f0!2f0!3f0!3m2!1i1020!2i768!4f13.1!3m3!1m2!1s0x3afcf4f364ca98e1%3A0x19dfa996796c0ba7!2sAnuradhapura!5e0!3m2!1sen!2slk!4v1716380000000!5m2!1sen!2slk" 
-              width="100%" 
-              height="100%" 
-              style={{ border: 0 }} 
-              allowFullScreen="" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63163.791559132225!2d80.37920115!3d8.33467475!2m3!1f0!2f0!3f0!3m2!1i1020!2i768!4f13.1!3m3!1m2!1s0x3afcf4f364ca98e1%3A0x19dfa996796c0ba7!2sAnuradhapura!5e0!3m2!1sen!2slk!4v1716380000000!5m2!1sen!2slk"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
@@ -339,7 +342,7 @@ const Home = () => {
             Indulge in a world of flavors. Our signature restaurants offer grand international buffets, live cooking stations, and exclusive fine dining experiences crafted by award-winning chefs.
           </p>
         </div>
-        
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ borderRadius: '20px', overflow: 'hidden', boxShadow: '0 15px 35px rgba(0,0,0,0.06)', position: 'relative' }}>
             <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=600&q=80" alt="Breakfast Buffet" style={{ width: '100%', height: '250px', objectFit: 'cover' }} />
@@ -349,7 +352,7 @@ const Home = () => {
               <span style={{ color: '#A07817', fontWeight: '700' }}>Complimentary for All Guests</span>
             </div>
           </div>
-          
+
           <div style={{ borderRadius: '20px', overflow: 'hidden', boxShadow: '0 15px 35px rgba(0,0,0,0.06)', position: 'relative' }}>
             <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&q=80" alt="Seafood Night" style={{ width: '100%', height: '250px', objectFit: 'cover' }} />
             <div style={{ padding: '30px', backgroundColor: '#FAFAFA' }}>
@@ -368,7 +371,7 @@ const Home = () => {
             <span style={{ color: '#FFD700', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '13px', letterSpacing: '2px' }}>Exclusive Rewards</span>
             <h2 style={{ fontSize: '2.8rem', fontWeight: '800', marginTop: '10px', fontFamily: 'serif' }}>Why Book Directly With Us?</h2>
           </div>
-          
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '40px' }}>
             {[
               { icon: '🚗', title: 'Airport Transfers', desc: 'Complimentary luxury SUV transfer for stays of 3 nights or more.' },
@@ -386,32 +389,8 @@ const Home = () => {
         </div>
       </div>
 
-      {/* 👤 9. PREMIUM FOOTER COMPONENT - FULL WIDTH */}
-      <footer style={{ backgroundColor: '#061626', color: '#94A3B8', padding: '60px 40px 30px 40px', fontSize: '14px', width: '100%', boxSizing: 'border-box' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '40px', marginBottom: '40px' }}>
-          <div style={{ flex: '1 1 300px' }}>
-            <h3 style={{ color: 'white', fontSize: '1.6rem', fontWeight: 'bold', margin: '0 0 15px 0' }}>Azure Horizon <span style={{ color: '#FFD700' }}>.</span></h3>
-            <p style={{ lineHeight: '1.6' }}>An elite hotel booking management experience structured for absolute comfort, historical tours, and premium coastal luxury.</p>
-          </div>
-          <div>
-            <h4 style={{ color: 'white', fontWeight: 'bold', marginBottom: '15px', textTransform: 'uppercase', fontSize: '12px', letterSpacing: '1px' }}>Quick Links</h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, lineHeight: '2.2' }}>
-              <li><a href="/" style={{ color: '#94A3B8', textDecoration: 'none' }}>Home Portal</a></li>
-              <li><a href="/rooms" style={{ color: '#94A3B8', textDecoration: 'none' }}>Rooms Catalog</a></li>
-              <li><a href="/about" style={{ color: '#94A3B8', textDecoration: 'none' }}>About Resort</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 style={{ color: 'white', fontWeight: 'bold', marginBottom: '15px', textTransform: 'uppercase', fontSize: '12px', letterSpacing: '1px' }}>Contact Desk</h4>
-            <p style={{ margin: '0 0 10px 0' }}>📍 New Town, Anuradhapura, Sri Lanka</p>
-            <p style={{ margin: '0 0 10px 0' }}>📞 +94 25 222 4567</p>
-            <p style={{ margin: 0 }}>✉️ support@azurehorizon.com</p>
-          </div>
-        </div>
-        <div style={{ borderTop: '1px solid #1E293B', paddingTop: '20px', textAlign: 'center', fontSize: '12px', color: '#64748B' }}>
-          © {new Date().getFullYear()} Azure Horizon Resort & Spa. All Rights Reserved. Designed for NIBM Coursework.
-        </div>
-      </footer>
+      {/* 👤 9. MODERN UNIFIED FOOTER COMPONENT */}
+      <ModernFooter />
 
       {/* 🤖 10. SMART AI CHATBOT (FLOATING) */}
       <div style={{ position: 'fixed', bottom: '30px', right: '30px', zIndex: '1000' }}>

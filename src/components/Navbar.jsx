@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import LoginModal from '../components/login/loginModel';
 import SignUpModal from '../components/login/signupModel';
 
@@ -7,6 +7,7 @@ const Navbar = () => {
   const [isLoginHovered, setIsLoginHovered] = useState(false);
   const [isBookHovered, setIsBookHovered] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,10 +65,10 @@ const Navbar = () => {
 
         {/* 2. DESKTOP NAVIGATION LINKS */}
         <div className="desktop-nav" style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
-          <Link to="/" style={linkStyle}>Home</Link>
-          <Link to="/rooms" style={linkStyle}>Rooms</Link>
-          <Link to="/about" style={linkStyle}>About Us</Link>
-          <Link to="/gallery" style={linkStyle}>Gallery</Link>
+          <Link to="/" style={{ ...linkStyle, color: location.pathname === '/' ? '#FFD700' : '#E2E8F0' }}>Home</Link>
+          <Link to="/rooms" style={{ ...linkStyle, color: location.pathname.startsWith('/room') ? '#FFD700' : '#E2E8F0' }}>Rooms</Link>
+          <Link to="/about" style={{ ...linkStyle, color: location.pathname === '/about' ? '#FFD700' : '#E2E8F0' }}>About Us</Link>
+          <Link to="/gallery" style={{ ...linkStyle, color: location.pathname === '/gallery' ? '#FFD700' : '#E2E8F0' }}>Gallery</Link>
         </div>
 
         {/* 3. RIGHT SIDE: PROFILE & ACTIONS */}
@@ -143,10 +144,10 @@ const Navbar = () => {
           display: 'flex', flexDirection: 'column', padding: '20px', gap: '20px', zIndex: 999,
           boxShadow: '0 10px 20px rgba(0,0,0,0.2)', borderTop: '1px solid #1E3A8A'
         }}>
-          <Link to="/" onClick={toggleMobileMenu} style={mobileLinkStyle}>Home</Link>
-          <Link to="/rooms" onClick={toggleMobileMenu} style={mobileLinkStyle}>Rooms</Link>
-          <Link to="/about" onClick={toggleMobileMenu} style={mobileLinkStyle}>About Us</Link>
-          <Link to="/gallery" onClick={toggleMobileMenu} style={mobileLinkStyle}>Gallery</Link>
+          <Link to="/" onClick={toggleMobileMenu} style={{ ...mobileLinkStyle, color: location.pathname === '/' ? '#FFD700' : 'white' }}>Home</Link>
+          <Link to="/rooms" onClick={toggleMobileMenu} style={{ ...mobileLinkStyle, color: location.pathname.startsWith('/room') ? '#FFD700' : 'white' }}>Rooms</Link>
+          <Link to="/about" onClick={toggleMobileMenu} style={{ ...mobileLinkStyle, color: location.pathname === '/about' ? '#FFD700' : 'white' }}>About Us</Link>
+          <Link to="/gallery" onClick={toggleMobileMenu} style={{ ...mobileLinkStyle, color: location.pathname === '/gallery' ? '#FFD700' : 'white' }}>Gallery</Link>
           <hr style={{ borderColor: '#1E3A8A', width: '100%', margin: '10px 0' }} />
           <div onClick={() => { toggleMobileMenu(); setIsModalOpen(true); }} style={mobileLinkStyle}>
             Login / Sign Up
