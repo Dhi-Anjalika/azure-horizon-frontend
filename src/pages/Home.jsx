@@ -330,6 +330,62 @@ const Home = () => {
         </div>
       </div>
 
+      {/* 🌟 NEW: CULINARY EXCELLENCE (BUFFET & DINING) */}
+      <div style={{ width: '100%', padding: '80px 40px', boxSizing: 'border-box', backgroundColor: '#FFFFFF' }}>
+        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <span style={{ color: '#A07817', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '13px', letterSpacing: '2px' }}>Epicurean Journeys</span>
+          <h2 style={{ fontSize: '2.8rem', color: '#0A2540', fontWeight: '800', marginTop: '10px', fontFamily: 'serif' }}>Culinary Excellence & Buffets</h2>
+          <p style={{ color: '#64748B', maxWidth: '700px', margin: '0 auto', fontSize: '1.1rem', lineHeight: '1.7' }}>
+            Indulge in a world of flavors. Our signature restaurants offer grand international buffets, live cooking stations, and exclusive fine dining experiences crafted by award-winning chefs.
+          </p>
+        </div>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ borderRadius: '20px', overflow: 'hidden', boxShadow: '0 15px 35px rgba(0,0,0,0.06)', position: 'relative' }}>
+            <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=600&q=80" alt="Breakfast Buffet" style={{ width: '100%', height: '250px', objectFit: 'cover' }} />
+            <div style={{ padding: '30px', backgroundColor: '#FAFAFA' }}>
+              <h3 style={{ color: '#0A2540', fontSize: '1.4rem', margin: '0 0 10px 0' }}>Grand Breakfast Buffet</h3>
+              <p style={{ color: '#64748B', margin: '0 0 15px 0' }}>Start your day with an opulent spread of continental pastries, tropical fruits, and live egg stations.</p>
+              <span style={{ color: '#A07817', fontWeight: '700' }}>Complimentary for All Guests</span>
+            </div>
+          </div>
+          
+          <div style={{ borderRadius: '20px', overflow: 'hidden', boxShadow: '0 15px 35px rgba(0,0,0,0.06)', position: 'relative' }}>
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&q=80" alt="Seafood Night" style={{ width: '100%', height: '250px', objectFit: 'cover' }} />
+            <div style={{ padding: '30px', backgroundColor: '#FAFAFA' }}>
+              <h3 style={{ color: '#0A2540', fontSize: '1.4rem', margin: '0 0 10px 0' }}>Ocean's Catch Seafood Night</h3>
+              <p style={{ color: '#64748B', margin: '0 0 15px 0' }}>Every Friday night, enjoy a limitless buffet of the freshest Indian Ocean seafood and premium steaks.</p>
+              <span style={{ color: '#A07817', fontWeight: '700' }}>Special Rate for Direct Bookings</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 👑 NEW: GUEST PRIVILEGES & BENEFITS */}
+      <div style={{ width: '100%', padding: '80px 40px', boxSizing: 'border-box', backgroundColor: '#0A2540', color: 'white' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+            <span style={{ color: '#FFD700', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '13px', letterSpacing: '2px' }}>Exclusive Rewards</span>
+            <h2 style={{ fontSize: '2.8rem', fontWeight: '800', marginTop: '10px', fontFamily: 'serif' }}>Why Book Directly With Us?</h2>
+          </div>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '40px' }}>
+            {[
+              { icon: '🚗', title: 'Airport Transfers', desc: 'Complimentary luxury SUV transfer for stays of 3 nights or more.' },
+              { icon: '💆‍♀️', title: 'Spa Credits', desc: 'Receive a $50 credit towards our signature Ayurvedic treatments.' },
+              { icon: '🥂', title: 'Welcome Amenities', desc: 'Enjoy a bottle of premium champagne and a fruit basket upon arrival.' },
+              { icon: '⏰', title: 'Flexible Timings', desc: 'Guaranteed early check-in at 10 AM and late check-out at 4 PM.' }
+            ].map((benefit, i) => (
+              <div key={i} style={{ textAlign: 'center', padding: '30px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '15px' }}>{benefit.icon}</div>
+                <h3 style={{ fontSize: '1.3rem', color: '#FFD700', marginBottom: '15px' }}>{benefit.title}</h3>
+                <p style={{ color: '#CBD5E1', lineHeight: '1.6' }}>{benefit.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* 👤 9. PREMIUM FOOTER COMPONENT - FULL WIDTH */}
       <footer style={{ backgroundColor: '#061626', color: '#94A3B8', padding: '60px 40px 30px 40px', fontSize: '14px', width: '100%', boxSizing: 'border-box' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '40px', marginBottom: '40px' }}>
